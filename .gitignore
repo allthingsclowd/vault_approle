@@ -2,3 +2,6 @@
 *.log
 main
 .vault-token
+.approle-id
+.secret-id
+

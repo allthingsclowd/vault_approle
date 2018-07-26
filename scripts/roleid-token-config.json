@@ -1,0 +1,7 @@
+{
+  "policies": [
+    "goapp-approle-roleid-get"
+  ],
+  "ttl": "720h",
+  "renewable": true
+}
