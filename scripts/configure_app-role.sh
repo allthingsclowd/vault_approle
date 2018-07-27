@@ -70,7 +70,7 @@ curl \
     --header "X-Vault-Token: ${VAULT_TOKEN}" \
     --request PUT \
     --data @goapp-secret-read.json \
-    ${VAULT_ADDR}/v1/sys/policy/goapp-secret-read | jq
+    ${VAULT_ADDR}/v1/sys/policy/goapp-secret-read | jq .
 
 ##--------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ curl \
     --location \
     --header "X-Vault-Token: ${VAULT_TOKEN}" \
     --request LIST \
-    ${VAULT_ADDR}/v1/sys/policy | jq
+    ${VAULT_ADDR}/v1/sys/policy | jq .
 
 ##--------------------------------------------------------------------
 ## Enable & Configure AppRole Auth Backend
@@ -102,7 +102,7 @@ curl \
     --header "X-Vault-Token: ${VAULT_TOKEN}" \
     --request POST \
     --data @approle.json \
-    ${VAULT_ADDR}/v1/sys/auth/approle | jq
+    ${VAULT_ADDR}/v1/sys/auth/approle | jq .
 
 # Check if AppRole Exists
 APPROLEID=`curl  \
@@ -134,7 +134,7 @@ if [ "${APPROLEID}" == null ]; then
         --header "X-Vault-Token: ${VAULT_TOKEN}" \
         --request POST \
         --data @goapp-approle-role.json \
-        ${VAULT_ADDR}/v1/auth/approle/role/goapp | jq
+        ${VAULT_ADDR}/v1/auth/approle/role/goapp | jq .
 
     APPROLEID=`curl  \
    --header "X-Vault-Token: ${VAULT_TOKEN}" \
@@ -177,12 +177,11 @@ EOF
 pause 'Deploy some accessible secrets - Press [Enter] key to continue...'
 
 curl \
-    --silent \
     --location \
     --header "X-Vault-Token: ${VAULT_TOKEN}" \
     --request POST \
     --data @demo-secrets.json \
-    ${VAULT_ADDR}/v1/secret/data/goapp
+    ${VAULT_ADDR}/v1/secret/data/goapp | jq .
 
 # Write some demo secrets that should NOT be accessible 
 tee demo-secrets.json <<'EOF'
@@ -197,12 +196,11 @@ EOF
 pause 'Deploy some inaccessible secrets - Press [Enter] key to continue...'
 
 curl \
-    --silent \
     --location \
     --header "X-Vault-Token: ${VAULT_TOKEN}" \
     --request POST \
     --data @demo-secrets.json \
-    ${VAULT_ADDR}/v1/secret/data/wrongapp
+    ${VAULT_ADDR}/v1/secret/data/wrongapp | jq .
 
 
 
