@@ -26,3 +26,8 @@ Explanation on how this functionality was implemented goes in the PR.
 ## Done
  - Implemented all-in-one vagrantfile that creates everything needed to leverage Vault's AppRole feature.
 
+
+# Installation Example
+
+https://gist.github.com/allthingsclowd/f9ebd159057fe99e5ec8433460a621af
+
