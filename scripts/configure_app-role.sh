@@ -155,7 +155,7 @@ fi
 pause 'Show AppRoleID - Press [Enter] key to continue...'
 
 echo -e "\n\nApplication RoleID = ${APPROLEID}\n\n"
-echo ${APPROLEID} > /vagrant/.approle-id
+echo ${APPROLEID} > /usr/local/bootstrap/.approle-id
 
 # Write minimal secret-id payload
 tee secret_id_config.json <<'EOF'
@@ -173,7 +173,7 @@ ${VAULT_ADDR}/v1/auth/approle/role/goapp/secret-id | jq -r .wrap_info.token`
 pause 'Show SecretID - Press [Enter] key to continue...'
 
 echo -e "\n\nApplication Wrapped SecretID = ${WRAPPED_SECRETID}\n\n"
-echo ${WRAPPED_SECRETID} > /vagrant/.wrapped_secret-id
+echo ${WRAPPED_SECRETID} > /usr/local/bootstrap/.wrapped_secret-id
 
 # Write some demo secrets that should be accessible 
 tee demo-secrets.json <<'EOF'
