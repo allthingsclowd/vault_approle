@@ -5,14 +5,18 @@ IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8}'`
 CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
 IP=${CIDR%%/24}
 
+if [ "${TRAVIS}" == "true" ]; then
+IP=${IP:-127.0.0.1}
+fi
+
 export VAULT_ADDR=http://${IP}:8200
 export VAULT_SKIP_VERIFY=true
 
 # The approle-id could be supplied by the app teams build process - possibly embedded into build image
-APPROLEID=`cat /vagrant/.approle-id`
+APPROLEID=`cat /usr/local/bootstrap/.approle-id`
 
 # The wrapped secret-id could be supplied by the platform teams build process
-WRAPPED_SECRETID=`cat /vagrant/.wrapped_secret-id`
+WRAPPED_SECRETID=`cat /usr/local/bootstrap/.wrapped_secret-id`
 
 # Unwrap secret-id from the application
 SECRETID=`curl \
@@ -57,4 +61,5 @@ if [ ${APPROLE_TOKEN} != null ]; then
     Inaccessible Secrets /secret/data/wrongapp  \n ${DENIED}\n"
 else
     echo -e "\nTOKEN Expired\n"
+    exit 1
 fi

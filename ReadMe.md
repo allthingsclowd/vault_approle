@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/allthingsclowd/vault_approle.svg?branch=master)](https://travis-ci.org/allthingsclowd/vault_approle)
+
 # All-in-One Vault AppRole Demo
 
 ![913ee4e2-b01c-4749-8daa-f3ec5f8e5203](https://user-images.githubusercontent.com/9472095/43364036-20dbed52-930a-11e8-9e93-6de1290108b6.png)

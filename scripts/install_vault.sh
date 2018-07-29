@@ -4,7 +4,16 @@ set -x
 IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8}'`
 CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
 IP=${CIDR%%/24}
-LOG="/vagrant/logs/vault_${HOSTNAME}.log"
+
+if [ -d /vagrant ]; then
+  LOG="/vagrant/logs/vault_${HOSTNAME}.log"
+else
+  LOG="consul.log"
+fi
+
+if [ "${TRAVIS}" == "true" ]; then
+IP=${IP:-127.0.0.1}
+fi
 
 which /usr/local/bin/vault &>/dev/null || {
     pushd /usr/local/bin

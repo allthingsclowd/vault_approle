@@ -1,0 +1,16 @@
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - jq
+      
+before_script:
+  - sudo rsync -az ${TRAVIS_BUILD_DIR}/ /usr/local/bootstrap/
+  - bash scripts/install_consul.sh
+  - bash scripts/install_vault.sh
+  - sudo cp /home/travis/.vault-token /usr/local/bootstrap/.vault-token
+  - bash scripts/configure_app-role.sh
+       
+script:
+  - bash scripts/install_demo_app.sh

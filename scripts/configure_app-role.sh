@@ -18,6 +18,16 @@ IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8}'`
 CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
 IP=${CIDR%%/24}
 
+if [ "${TRAVIS}" == "true" ]; then
+IP=${IP:-127.0.0.1}
+fi
+
+if [ -d /vagrant ]; then
+  LOG="/vagrant/logs/vault_audit_${HOSTNAME}.log"
+else
+  LOG="vault_audit.log"
+fi
+
 export VAULT_ADDR=http://${IP}:8200
 export VAULT_SKIP_VERIFY=true
 
@@ -26,7 +36,7 @@ VAULT_TOKEN=`cat /usr/local/bootstrap/.vault-token`
 ##--------------------------------------------------------------------
 ## Configure Audit Backend
 
-VAULT_AUDIT_LOG="/vagrant/logs/vault_audit_${HOSTNAME}.log"
+VAULT_AUDIT_LOG="${LOG}"
 #sudo chown vault:vault ${VAULT_AUDIT_LOG}
 
 PKG="curl jq"
@@ -145,7 +155,7 @@ fi
 pause 'Show AppRoleID - Press [Enter] key to continue...'
 
 echo -e "\n\nApplication RoleID = ${APPROLEID}\n\n"
-echo ${APPROLEID} > /vagrant/.approle-id
+echo ${APPROLEID} > /usr/local/bootstrap/.approle-id
 
 # Write minimal secret-id payload
 tee secret_id_config.json <<'EOF'
@@ -163,7 +173,7 @@ ${VAULT_ADDR}/v1/auth/approle/role/goapp/secret-id | jq -r .wrap_info.token`
 pause 'Show SecretID - Press [Enter] key to continue...'
 
 echo -e "\n\nApplication Wrapped SecretID = ${WRAPPED_SECRETID}\n\n"
-echo ${WRAPPED_SECRETID} > /vagrant/.wrapped_secret-id
+echo ${WRAPPED_SECRETID} > /usr/local/bootstrap/.wrapped_secret-id
 
 # Write some demo secrets that should be accessible 
 tee demo-secrets.json <<'EOF'
