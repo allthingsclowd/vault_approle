@@ -39,7 +39,7 @@ which ${PKG} &>/dev/null || {
 AGENT_CONFIG="-config-dir=/etc/consul.d -enable-script-checks=true"
 sudo mkdir -p /etc/consul.d
 # check for consul hostname or travis => server
-if [[ "${HOSTNAME}" =~ "leader" ]]; then
+if [[ "${HOSTNAME}" =~ "leader" ]] || [ "${TRAVIS}" == "true" ]; then
   echo server
 
   /usr/local/bin/consul members 2>/dev/null || {
