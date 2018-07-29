@@ -1,14 +1,9 @@
-language: go
-
 sudo: required
 
 addons:
   apt:
     packages:
       - jq
-
-go:
-  - "1.10"
       
 before_script:
   - sudo rsync -az ${TRAVIS_BUILD_DIR}/ /usr/local/bootstrap/
