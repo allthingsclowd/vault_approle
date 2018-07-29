@@ -1,4 +1,7 @@
 # All-in-One Vault AppRole Demo
+
+![8acc344a-0b17-44c0-bd5a-e4d4b92330b2](https://user-images.githubusercontent.com/9472095/43363712-b82736e2-9302-11e8-987b-5976bb2aca7b.png)
+
 This repository has everything needed to walk through HasihCorp's Vault AppRole process. Typically everything that is squashed onto a single instance here for demonstration purposes would be broken out across the CI/CD pipeline.
 
 The Role ID is equivalent to a username, and Secret ID is the corresponding password. The app needs both to log in with Vault. Naturally, the next question becomes how to deliver those values to the expecting client.
