@@ -4,9 +4,18 @@ set -x
 IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8;exit}'`
 CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
 IP=${CIDR%%/24}
-LOG="/vagrant/logs/consul_${HOSTNAME}.log"
 
-mkdir -p /vagrant/logs
+if [ -d /vagrant ]; then
+  LOG="/vagrant/logs/consul_${HOSTNAME}.log"
+  mkdir -p /vagrant/logs
+else
+  LOG="consul.log"
+fi
+
+if [ "${TRAVIS}" == "true" ]; then
+IP=${IP:-127.0.0.1}
+fi
+
 
 PKG="wget unzip"
 which ${PKG} &>/dev/null || {

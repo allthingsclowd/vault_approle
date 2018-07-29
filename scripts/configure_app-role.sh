@@ -18,6 +18,16 @@ IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8}'`
 CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
 IP=${CIDR%%/24}
 
+if [ "${TRAVIS}" == "true" ]; then
+IP=${IP:-127.0.0.1}
+fi
+
+if [ -d /vagrant ]; then
+  LOG="/vagrant/logs/vault_audit_${HOSTNAME}.log"
+else
+  LOG="vault_audit.log"
+fi
+
 export VAULT_ADDR=http://${IP}:8200
 export VAULT_SKIP_VERIFY=true
 
@@ -26,7 +36,7 @@ VAULT_TOKEN=`cat /usr/local/bootstrap/.vault-token`
 ##--------------------------------------------------------------------
 ## Configure Audit Backend
 
-VAULT_AUDIT_LOG="/vagrant/logs/vault_audit_${HOSTNAME}.log"
+VAULT_AUDIT_LOG="${LOG}"
 #sudo chown vault:vault ${VAULT_AUDIT_LOG}
 
 PKG="curl jq"
