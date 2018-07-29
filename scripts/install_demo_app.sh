@@ -61,4 +61,5 @@ if [ ${APPROLE_TOKEN} != null ]; then
     Inaccessible Secrets /secret/data/wrongapp  \n ${DENIED}\n"
 else
     echo -e "\nTOKEN Expired\n"
+    exit 1
 fi
