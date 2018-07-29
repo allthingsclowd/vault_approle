@@ -7,9 +7,6 @@ addons:
       
 before_script:
   - sudo rsync -az ${TRAVIS_BUILD_DIR}/ /usr/local/bootstrap/
-  - pushd packer
-  - if [ $VAGRANT_CLOUD_TOKEN ] ; then packer validate template.json ; fi
-  - popd
   - bash scripts/install_consul.sh
   - bash scripts/install_vault.sh
   - sudo cp /home/travis/.vault-token /usr/local/bootstrap/.vault-token
