@@ -27,6 +27,7 @@ Explanation on how this functionality was implemented goes in the PR.
 ### - Add response wrapping feature to secret-id
 This advanced feature ensures that ONLY the application gets to see the actual Secret-Id
 
+![913ee4e2-b01c-4749-8daa-f3ec5f8e5203](https://user-images.githubusercontent.com/9472095/43364036-20dbed52-930a-11e8-9e93-6de1290108b6.png)
 
 ## Done
  - Implemented all-in-one vagrantfile that creates everything needed to leverage Vault's AppRole feature.
