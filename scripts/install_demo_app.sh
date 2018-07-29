@@ -11,8 +11,16 @@ export VAULT_SKIP_VERIFY=true
 # The approle-id could be supplied by the app teams build process - possibly embedded into build image
 APPROLEID=`cat /vagrant/.approle-id`
 
-# The secret-id could be supplied by the platform teams build process
-SECRETID=`cat /vagrant/.secret-id`
+# The wrapped secret-id could be supplied by the platform teams build process
+WRAPPED_SECRETID=`cat /vagrant/.wrapped_secret-id`
+
+# Unwrap secret-id from the application
+SECRETID=`curl \
+    --header "X-Vault-Token: ${WRAPPED_SECRETID}" \
+    --request POST \
+    ${VAULT_ADDR}/v1/sys/wrapping/unwrap | jq -r .data.secret_id`
+
+echo ${SECRETID}
 
 # Configure payload for approle login
 tee login_approle.json <<EOF

@@ -154,15 +154,16 @@ tee secret_id_config.json <<'EOF'
 }
 EOF
 
-SECRETID=`curl  \
+WRAPPED_SECRETID=`curl  \
 --header "X-Vault-Token: ${VAULT_TOKEN}" \
+--header "X-Vault-Wrap-TTL:5m" \
 --data @secret_id_config.json \
-${VAULT_ADDR}/v1/auth/approle/role/goapp/secret-id | jq -r .data.secret_id`
+${VAULT_ADDR}/v1/auth/approle/role/goapp/secret-id | jq -r .wrap_info.token`
 
 pause 'Show SecretID - Press [Enter] key to continue...'
 
-echo -e "\n\nApplication SecretID = ${SECRETID}\n\n"
-echo ${SECRETID} > /vagrant/.secret-id
+echo -e "\n\nApplication Wrapped SecretID = ${WRAPPED_SECRETID}\n\n"
+echo ${WRAPPED_SECRETID} > /vagrant/.wrapped_secret-id
 
 # Write some demo secrets that should be accessible 
 tee demo-secrets.json <<'EOF'
