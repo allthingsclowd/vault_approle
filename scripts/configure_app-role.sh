@@ -150,7 +150,8 @@ echo ${APPROLEID} > /vagrant/.approle-id
 # Write minimal secret-id payload
 tee secret_id_config.json <<'EOF'
 {
-  "metadata": "{ \"tag1\": \"goapp production\" }"
+  "metadata": "{ \"tag1\": \"goapp production\" }",
+  "wrap-ttl": 7200
 }
 EOF
 
