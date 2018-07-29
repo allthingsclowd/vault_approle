@@ -24,6 +24,8 @@ When PR merged, state how much time was used.
 What the new functionality needs to do?
 Why we need this functionality?
 Explanation on how this functionality was implemented goes in the PR.
+### - Add response wrapping feature to secret-id
+This advanced feature ensures that ONLY the application gets to see the actual Secret-Id
 
 
 ## Done
