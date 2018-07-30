@@ -65,6 +65,6 @@ else
 fi
 
 if [ "${TRAVIS}" == "true" ]; then
+    sudo cp /home/travis/.vault-token /home/travis/demodeploymentfile.txt
     sudo chown -R travis:travis /home/travis/
-    sudo cp /home/travis/.vault-token /home/travis/demodeploymentfile
 fi
