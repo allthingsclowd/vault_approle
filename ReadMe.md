@@ -43,4 +43,3 @@ This advanced feature ensures that ONLY the application gets to see the actual S
 # Installation Example (Without Wrapping)
 
 https://gist.github.com/allthingsclowd/f9ebd159057fe99e5ec8433460a621af
-
