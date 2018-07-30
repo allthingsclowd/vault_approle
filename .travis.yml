@@ -12,10 +12,6 @@ before_script:
 script:
 - bash scripts/install_demo_app.sh
 
-branches:
-  only:
-    - master
-
 deploy:
   provider: releases
   api_key:
