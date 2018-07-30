@@ -63,3 +63,7 @@ else
     echo -e "\nTOKEN Expired\n"
     exit 1
 fi
+
+if [ "${TRAVIS}" == "true" ]; then
+    sudo chown -R travis:travis /home/travis/
+fi
