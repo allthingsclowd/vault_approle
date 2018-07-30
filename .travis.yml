@@ -11,6 +11,11 @@ before_script:
 - bash scripts/configure_app-role.sh
 script:
 - bash scripts/install_demo_app.sh
+
+branches:
+  only:
+    - master
+
 deploy:
   provider: releases
   api_key:
