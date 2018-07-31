@@ -67,10 +67,4 @@ fi
 if [ "${TRAVIS}" == "true" ]; then
     sudo cp /home/travis/.vault-token demodeploymentfile.txt
     sudo chown -R travis:travis /home/travis/
-    ls -l /home/travis/build/allthingsclowd/vault_approle
-    cat /home/travis/build/allthingsclowd/vault_approle/demodeploymentfile.txt
-    cat demodeploymentfile.txt
-    pwd
-    sudo pwd
-
 fi
