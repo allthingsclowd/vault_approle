@@ -19,5 +19,4 @@ deploy:
   file: "./demodeploymentfile.txt"
   skip_cleanup: true
   on:
-    repo: allthingsclowd/vault_approle
     tags: true
