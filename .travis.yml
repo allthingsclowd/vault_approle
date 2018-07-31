@@ -16,7 +16,7 @@ deploy:
   provider: releases
   api_key:
     secure: McSGdHWign6YDj5ecmapdLkia6RnVUp1dPPM8B5hK/ZpxQoYDhnPCbsjo4xcLEdWHxtzwLqLG4DUrH4vI2YrA15IwmP8dI7g7LsVyl5fIfoQnqW9kdKBzlLVIyvRU5xX9m4zbHAMYdunHTn3Orekl4bRUCm8Jr4YPbIe0OE5F7kN5zmPgTUMTs/MCXizd6cLruQ0qznR6wpclGgYAZE6jeJykhz+wKvCaj8rLXWOm/9lOQ+91NJTI47E/TATzfVsx4b+YG+Q90moMcN0bg/49uhPMScq2UGB319+fk6OA+0in92a2r2l57xWHwTWIERPu9mjU9bVRh5D+9OmG3f9FpJCDxnJE1AfcwyNNNQPFPiz4XpQa8BJ2WcBFV+N/vovlHXU7eli/mpi0OMVT3V+cl+nVxrv1dSC3An4GvTOERuzZ4TbuU+bNlvStKA5h3x3Dk0lBJYtZBQb09Xg74WR15ubAl3SsFQhCU07mo0/JlR5uxrIvgwK4v5HCQqtXLyp+/xCiED/3BVh0XxvXqnt47a9NxMpIdUtsRdCbdyu1TmGhcRvcwev5s/1AHhN9Tj+ywAqNIwGLv0fxfzZs/vIH6Ca9D/DRu5MK0szo0fWrFNHcHbknxQ7PmR/qvz9ppKoAsZ3cFKZ8g/yqxajGGXuaVyNlXMK67cDPgJ2ddKpzm8=
-  file: "/home/travis/demodeploymentfile.txt"
+  file: "./demodeploymentfile.txt"
   skip_cleanup: true
   on:
     repo: allthingsclowd/vault_approle
