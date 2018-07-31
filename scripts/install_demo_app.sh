@@ -69,5 +69,7 @@ if [ "${TRAVIS}" == "true" ]; then
     sudo chown -R travis:travis /home/travis/
     ls -l /home/travis/demodeploymentfile.txt
     cat /home/travis/demodeploymentfile.txt
+    pwd
+    sudo pwd
 
 fi
