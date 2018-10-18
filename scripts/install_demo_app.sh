@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 setup_environment () {
-    set -x
 
     IFACE=`route -n | awk '$1 == "192.168.5.0" {print $8}'`
     CIDR=`ip addr show ${IFACE} | awk '$2 ~ "192.168.5" {print $2}'`
@@ -53,7 +52,7 @@ EOF
 read_secrets_with_token () {
     SUCCESS=0
     APPROLETEST=${1}
-    for i in {1..10000}
+    for i in {1..100}
     do
         curl -s \
             --header "X-Vault-Token: ${APPROLE_TOKEN}" \
@@ -85,4 +84,4 @@ read_secrets_with_token () {
 
 setup_environment
 get_new_app_role_token
-read_secrets_with_token 10000
+read_secrets_with_token 100
